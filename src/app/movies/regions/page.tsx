@@ -19,26 +19,31 @@ const regions: RegionDto[] = [
 
 function RegionsPage() {
   return (
-    <main className='p-6'>
-      <div>
-        <table>
+    <main className='p-6 flex justify-center'>
+      <div className='p-2 flex flex-col'>
+
+        <table className='border-collapse text-left'>
           <thead>
             <tr>
-              <th>Titre</th>
-              <th>Actions</th>
+              <th className='border border-gray-500 p-3'>Titre</th>
+              <th className='border border-gray-500 p-3'>Actions</th>
             </tr>
           </thead>
           <tbody>
             {regions.map(region => (
               <tr key={region._id}>
-                <td>{region.name}</td>
-                <td>
-                  <Link href={`/movies/regions/${region.name}`}>Modifier</Link>
+                <td className='border border-gray-500 p-3'>{region.name}</td>
+                <td className='border border-gray-500 p-3'>
+                  <Link href={`/movies/regions/${region._id}`}>Modifier</Link>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+
+        <Link className='rounded-lg mt-4 px-4 py-2 bg-amber-300 hover:bg-amber-400' href="/movies/regions/add">
+          + Créer une région
+        </Link>
       </div>
     </main>
   )

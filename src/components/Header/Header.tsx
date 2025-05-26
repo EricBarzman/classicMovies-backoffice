@@ -7,7 +7,7 @@ function Header() {
   return (
     <header className="p-6 border-b-1">
       <nav className="flex justify-between items-center">
-        <Link href="/">Home</Link>
+        <Link className="ml-4 font-semibold text-xl" href="/">Home</Link>
         <div className="flex justify-between items-center">
           <Link href="/movies" className="py-2 px-4 underline rounded-sm hover:bg-amber-500">
             Movies
