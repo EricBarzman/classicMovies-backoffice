@@ -1,33 +1,28 @@
 import Link from 'next/link'
 import React from 'react'
 
+const categories = [
+  "regions",
+  "countries",
+  "genres",
+  "keywords",
+  "directors",
+  "movies",
+]
+
 function MoviesHomePage() {
   return (
-    <main className='p-6'>
-      <div className='flex flex-col items-center'>
-        <h2 className='text-xl font-semibold mb-12'>All movie related categories</h2>
-        <div className='grid grid-cols-3 gap-30'>
-          <Link href="/movies/regions">
-            Regions
+    <div className='flex flex-col items-center'>
+      <h2 className='text-xl font-semibold mb-12'>All movie related categories</h2>
+      <div className='grid grid-cols-3 gap-30 '>
+        {categories.map(cat => (
+          <Link key={cat} href={`/movies/${cat}`} className='p-2 rounded-lg hover:bg-amber-500'>
+            {/* Affiche le nom de la catégorie */}
+            {cat[0].toUpperCase() + cat.substring(1)}
           </Link>
-          <Link href="/movies/countries">
-            Countries
-          </Link>
-          <Link href="/movies/genres">
-            Genres
-          </Link>
-          <Link href="/movies/keywords">
-            Keywords
-          </Link>
-          <Link href="/movies/directors">
-            Directors
-          </Link>
-          <Link href="/movies/movies">
-            Movies
-          </Link>
-        </div>
+        ))}
       </div>
-    </main>
+    </div>
   )
 }
 

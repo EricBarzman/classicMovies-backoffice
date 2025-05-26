@@ -19,13 +19,13 @@ const regions: RegionDto[] = [
 
 function RegionsPage() {
   return (
-    <main className='p-6 flex justify-center'>
+    <div className='p-6 flex justify-center'>
       <div className='p-2 flex flex-col'>
 
         <table className='border-collapse text-left'>
           <thead>
             <tr>
-              <th className='border border-gray-500 p-3'>Titre</th>
+              <th className='border border-gray-500 p-3'>Name</th>
               <th className='border border-gray-500 p-3'>Actions</th>
             </tr>
           </thead>
@@ -33,8 +33,8 @@ function RegionsPage() {
             {regions.map(region => (
               <tr key={region._id}>
                 <td className='border border-gray-500 p-3'>{region.name}</td>
-                <td className='border border-gray-500 p-3'>
-                  <Link href={`/movies/regions/${region._id}`}>Modifier</Link>
+                <td className='border border-gray-500 hover:bg-amber-200'>
+                  <Link href={`/movies/regions/${region._id}`} className='p-3'>Voir</Link>
                 </td>
               </tr>
             ))}
@@ -45,7 +45,7 @@ function RegionsPage() {
           + Créer une région
         </Link>
       </div>
-    </main>
+    </div>
   )
 }
 

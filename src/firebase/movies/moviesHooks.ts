@@ -15,6 +15,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../client";
+// import { RegionDto } from "@/types/movies.type";
 
 
 export function useRegions() {
@@ -27,7 +28,7 @@ export function useRegions() {
     return snap.docs.map(doc => Object.assign({}, { id: doc.id }, doc.data()));
   };
 
-  const getRegionsById = async (id: string) => {
+  const getRegionById = async (id: string) => {
     const ref = doc(db, 'regions', id);
     const snap = await getDoc(ref);
     return { ...snap.data(), id }
@@ -53,7 +54,7 @@ export function useRegions() {
 
   return {
     getRegions,
-    getRegionsById,
+    getRegionById,
     createRegion,
     updateRegion,
     deleteRegion,
