@@ -1,23 +1,21 @@
+"use client";
+
+import { useRegions } from '@/firebase/movies/moviesHooks';
 import { RegionDto } from '@/types/movies.type'
 import Link from 'next/link'
-import React from 'react'
-
-const regions: RegionDto[] = [
-  {
-    _id: 'qrgfsd',
-    name: 'Europe'
-  },
-  {
-    _id: 'qerteori',
-    name: 'Asia'
-  },
-  {
-    _id: 'opiupize',
-    name: 'North America'
-  }
-]
+import React, { useEffect, useState } from 'react'
 
 function RegionsPage() {
+
+  const [regions, setRegions] = useState<RegionDto[] | null>([]);
+  const { getRegions } = useRegions();
+
+  useEffect(() => {
+    getRegions()
+      .then((data) => setRegions(data))
+      .catch(error => { throw new Error(error) });
+  }, [])
+
   return (
     <div className='p-6 flex justify-center'>
       <div className='p-2 flex flex-col'>
@@ -31,10 +29,10 @@ function RegionsPage() {
           </thead>
           <tbody>
             {regions.map(region => (
-              <tr key={region._id}>
+              <tr key={region.id}>
                 <td className='border border-gray-500 p-3'>{region.name}</td>
                 <td className='border border-gray-500 hover:bg-amber-200'>
-                  <Link href={`/movies/regions/${region._id}`} className='p-3'>Voir</Link>
+                  <Link href={`/movies/regions/${region.id}`} className='p-3'>Voir</Link>
                 </td>
               </tr>
             ))}

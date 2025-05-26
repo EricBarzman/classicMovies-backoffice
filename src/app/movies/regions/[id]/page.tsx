@@ -1,7 +1,7 @@
 "use client";
 
-import RegionBackButton from "@/components/RegionTable/RegionBackButton";
-import RegionTable from "@/components/RegionTable/RegionTable";
+import RegionBackButton from "@/components/RegionComponents/RegionBackButton";
+import RegionTable from "@/components/RegionComponents/RegionTable";
 import { useRegions } from "@/firebase/movies/moviesHooks"
 import { RegionDto } from "@/types/movies.type";
 import { useParams, useRouter } from "next/navigation";
@@ -15,14 +15,11 @@ function RegionPage() {
 
   const { getRegionById, deleteRegion } = useRegions();
 
-  const [region, setRegion] = useState<RegionDto>({
-    _id: "664564",
-    name: "Europe",
-  })
+  const [region, setRegion] = useState<RegionDto>({});
 
   useEffect(() => {
-    // getRegionById(id)
-    //   .then((response) => setRegion(response));
+    getRegionById(id)
+      .then((response) => setRegion(response));
   }, [])
 
   async function handleDeleteClick() {
@@ -31,7 +28,7 @@ function RegionPage() {
     try {
       await deleteRegion(id);
       toast.success("Deleted");
-      router.push("/movies/genres");
+      router.push("/movies/regions");
 
     } catch (error) {
       toast.error("Something went wrong. Try again.")
@@ -41,14 +38,14 @@ function RegionPage() {
   }
 
   return (
-    <div className='p-6 flex justify-center relative'>
+    <div className='p-6 flex justify-center'>
       <div className="flex flex-col">
         <h2 className="text-xl mb-6 font-semibold">
           {region.name}
         </h2>
         <RegionTable region={region} />
         <button
-          className="block mt-4 rounded-2xl p-2 bg-red-500 hover:bg-red-600 text-white text-center"
+          className="block mt-10 rounded-2xl p-2 bg-red-500 hover:bg-red-600 text-white text-center"
           onClick={handleDeleteClick}
         >
           Delete region

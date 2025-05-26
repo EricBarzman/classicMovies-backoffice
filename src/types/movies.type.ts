@@ -1,29 +1,33 @@
 
 export type RegionDto = {
-  _id: string;
+  id: string;
+  name: string;
+}
+
+export type CreatedRegionDto = {
   name: string;
 }
 
 export type CountryDto = {
-  _id: string;
+  id: string;
   name: string;
   region: RegionDto;
 }
 
 export type KeywordDto = {
-  _id: string;
+  id: string;
   label: string;
 }
 
 export type DirectorDto = {
-  _id: string;
+  id: string;
   firstName : string;
   lastName : string;
   country : CountryDto;
 }
 
 export type GenreDto = {
-  _id: string;
+  id: string;
   label : string;
   slug: string;
 }
@@ -31,7 +35,7 @@ export type GenreDto = {
 export type DecadeChoiceProps = '1920' | '1930' | '1940' | '1950' | '1960' | '1970' | '1980' | '1990' | '2000' | '2010'
 
 export type MoviesCompleteDto = {
-  _id: string;
+  id: string;
   title: string;
   slug: string;
   year: number;
@@ -45,7 +49,7 @@ export type MoviesCompleteDto = {
 }
 
 export type MoviesSmallDto = {
-  _id: string;
+  id: string;
   title: string;
   slug: string;
   year: number;

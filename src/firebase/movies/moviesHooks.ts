@@ -47,7 +47,7 @@ export function useRegions() {
     return updateDoc(ref, data);
   };
 
-  const deleteRegion = async(id: string) => {
+  const deleteRegion = async (id: string) => {
     const ref = doc(db, 'regions', id);
     return deleteDoc(ref);
   };
