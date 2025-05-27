@@ -1,10 +1,7 @@
 import {
   DocumentData,
-  QueryFilterConstraint,
   Timestamp,
   addDoc,
-  and,
-  where,
   collection,
   deleteDoc,
   doc,

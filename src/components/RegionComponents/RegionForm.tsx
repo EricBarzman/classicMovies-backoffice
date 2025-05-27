@@ -1,4 +1,4 @@
-import { useRegions } from "@/firebase/movies/moviesHooks";
+import { useRegions } from "@/firebase/movies/regionHooks";
 import { DocumentData } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -13,9 +13,8 @@ function RegionForm({ id }: { id: null | string; }) {
   const { getRegionById, createRegion, updateRegion } = useRegions();
 
   const router = useRouter();
-  const [nameError, setNameError] = useState<string | null>(null);
-  // const { createRegion, updateRegion } = useRegions();
-
+  const [nameError] = useState<string | null>(null);
+  
   useEffect(() => {
     if (id) {
       getRegionById(id).then(data => setRegion(data))

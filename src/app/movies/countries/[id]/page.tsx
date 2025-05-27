@@ -1,34 +1,43 @@
 "use client";
 
 import BackButton from "@/components/MovieBackButton/BackButton";
-import RegionTable from "@/components/RegionComponents/RegionTable";
-import { useRegions } from "@/firebase/movies/regionHooks"
-import { RegionDto } from "@/types/movies.type";
+import CountryTable from "@/components/CountryComponents/CountryTable";
+import { useCountries } from "@/firebase/movies/countryHooks"
+import { CountryDto } from "@/types/movies.type";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-function RegionPage() {
+function CountryPage() {
 
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
 
-  const { getRegionById, deleteRegion } = useRegions();
+  const { getCountryById, deleteCountry } = useCountries();
 
-  const [region, setRegion] = useState<RegionDto>({});
+  const [country, setCountry] = useState<CountryDto>({
+    id: "",
+    name: "",
+    region: {
+      id: "",
+      name: ""
+    }
+  });
 
   useEffect(() => {
-    getRegionById(id)
-      .then((response) => setRegion(response));
+    getCountryById(id)
+      .then((response) => {
+        setCountry(response);
+      });
   }, [])
 
   async function handleDeleteClick() {
     if (!confirm("Are you sure you want to delete?")) return;
 
     try {
-      await deleteRegion(id);
+      await deleteCountry(id);
       toast.success("Deleted");
-      router.push("/movies/regions");
+      router.push("/movies/countries");
 
     } catch (error) {
       toast.error("Something went wrong. Try again.")
@@ -41,20 +50,20 @@ function RegionPage() {
     <div className='p-6 flex justify-center'>
       <div className="flex flex-col">
         <h2 className="text-xl mb-6 font-semibold">
-          {region.name}
+          {country.name}
         </h2>
-        <RegionTable region={region} />
+        <CountryTable country={country} />
         <button
           className="block mt-10 rounded-2xl p-2 bg-red-500 hover:bg-red-600 text-white text-center"
           onClick={handleDeleteClick}
         >
-          Delete region
+          Delete country
         </button>
-        <BackButton name="regions" />
+        <BackButton name="countries" />
       </div>
 
     </div>
   )
 }
 
-export default RegionPage
+export default CountryPage

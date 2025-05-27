@@ -1,18 +1,22 @@
 "use client";
 
-import { useRegions } from '@/firebase/movies/regionHooks';
+import { useCountries } from '@/firebase/movies/countryHooks';
 import { RegionDto } from '@/types/movies.type'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
-function RegionsPage() {
+function CountriesPage() {
 
-  const [regions, setRegions] = useState<RegionDto[] | null>([]);
-  const { getRegions } = useRegions();
+  const [countries, setCountries] = useState<RegionDto[]>([{
+    id: '',
+    name: ''
+  }]);
+  
+  const { getCountries } = useCountries();
 
   useEffect(() => {
-    getRegions()
-      .then((data) => setRegions(data))
+    getCountries()
+      .then((data) => setCountries(data))
       .catch(error => { throw new Error(error) });
   }, [])
 
@@ -28,23 +32,23 @@ function RegionsPage() {
             </tr>
           </thead>
           <tbody>
-            {regions.map(region => (
-              <tr key={region.id}>
-                <td className='border border-gray-500 p-3'>{region.name}</td>
+            {countries.map(country => (
+              <tr key={country.id}>
+                <td className='border border-gray-500 p-3'>{country.name}</td>
                 <td className='border border-gray-500 hover:bg-amber-200'>
-                  <Link href={`/movies/regions/${region.id}`} className='p-3'>Voir</Link>
+                  <Link href={`/movies/countries/${country.id}`} className='p-3'>See</Link>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
 
-        <Link className='rounded-lg mt-4 px-4 py-2 bg-amber-300 hover:bg-amber-400' href="/movies/regions/add">
-          + Créer une région
+        <Link className='rounded-lg mt-4 px-4 py-2 bg-amber-300 hover:bg-amber-400' href="/movies/countries/add">
+          + Create country
         </Link>
       </div>
     </div>
   )
 }
 
-export default RegionsPage
+export default CountriesPage

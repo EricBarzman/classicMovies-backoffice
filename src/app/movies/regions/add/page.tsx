@@ -1,6 +1,6 @@
 "use client";
 
-import RegionBackButton from '@/components/RegionComponents/RegionBackButton';
+import RegionBackButton from '@/components/MovieBackButton/BackButton';
 import RegionForm from '@/components/RegionComponents/RegionForm';
 
 function AddRegion() {
