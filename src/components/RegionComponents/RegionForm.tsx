@@ -13,7 +13,7 @@ function RegionForm({ id }: { id: null | string; }) {
   const { getRegionById, createRegion, updateRegion } = useRegions();
 
   const router = useRouter();
-  const [nameError] = useState<string | null>(null);
+  const [nameError, setNameError] = useState<string | null>(null);
   
   useEffect(() => {
     if (id) {
@@ -21,7 +21,13 @@ function RegionForm({ id }: { id: null | string; }) {
     }
   }, [])
 
-  async function handleSubmit() {
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (region.name.length < 1 || region.name === "") {
+      setNameError("You must type a name");
+      return;
+    }
+    
     try {
       if (!id) {
         await createRegion(region);
