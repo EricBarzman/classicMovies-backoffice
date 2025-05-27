@@ -4,18 +4,18 @@ import { useEffect, useState } from "react";
 // Firebase
 import { useCountries } from "@/firebase/movies/countryHooks";
 import { useRegions } from "@/firebase/movies/regionHooks";
-import { DocumentData } from "firebase/firestore";
 
 import toast from "react-hot-toast";
+import { CountrySentDto, RegionDto } from "@/types/movies.type";
 
 function CountryForm({ id }: { id: null | string; }) {
 
-  const [country, setCountry] = useState<DocumentData>({
+  const [country, setCountry] = useState<CountrySentDto>({
     name: "",
     regionId: ""
   });
 
-  const [regions, setRegions] = useState<[DocumentData]>([{
+  const [regions, setRegions] = useState<[RegionDto]>([{
     id: "",
     name: "",
   }]);
@@ -50,13 +50,19 @@ function CountryForm({ id }: { id: null | string; }) {
       }
 
       if (!id) {
-        await createCountry(country);
+        await createCountry({
+          name: country.name,
+          regionId: country.regionId,
+        });
         router.push("/movies/countries");
         toast.success("Country successfully created");
 
       }
       else {
-        await updateCountry(id, country);
+        await updateCountry(id, {
+          name: country.name,
+          regionId: country.regionId,
+        });
         router.push("/movies/countries");
         toast.success("Country successfully edited");
       };

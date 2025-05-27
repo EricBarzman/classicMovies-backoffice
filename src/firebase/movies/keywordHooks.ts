@@ -14,45 +14,45 @@ import {
 import { db } from "../client";
 
 
-export function useGenres() {
+export function useKeywords() {
 
-  const getGenres = async () => {
-    const ref = collection(db, 'genres');
+  const getKeywords = async () => {
+    const ref = collection(db, 'keywords');
     const snap = await getDocs(
       query(ref, orderBy('label'))
     );
     return snap.docs.map(doc => Object.assign({}, { id: doc.id }, doc.data()));
   };
 
-  const getGenreById = async (id: string) => {
-    const ref = doc(db, 'genres', id);
+  const getKeywordById = async (id: string) => {
+    const ref = doc(db, 'keywords', id);
     const snap = await getDoc(ref);
     return { ...snap.data(), id }
   };
 
-  const createGenre = async (data: DocumentData) => {
-    const ref = collection(db, 'genres');
+  const createKeyword = async (data: DocumentData) => {
+    const ref = collection(db, 'keywords');
     return addDoc(ref, {
       ...data,
       createdAt: Timestamp.fromDate(new Date())
     })
   };
 
-  const updateGenre = async (id: string, data: DocumentData) => {
-    const ref = doc(db, 'genres', id);
+  const updateKeyword = async (id: string, data: DocumentData) => {
+    const ref = doc(db, 'keywords', id);
     return updateDoc(ref, data);
   };
 
-  const deleteGenre = async (id: string) => {
-    const ref = doc(db, 'genres', id);
+  const deleteKeyword = async (id: string) => {
+    const ref = doc(db, 'keywords', id);
     return deleteDoc(ref);
   };
 
   return {
-    getGenres,
-    getGenreById,
-    createGenre,
-    updateGenre,
-    deleteGenre,
+    getKeywords,
+    getKeywordById,
+    createKeyword,
+    updateKeyword,
+    deleteKeyword,
   }
 }

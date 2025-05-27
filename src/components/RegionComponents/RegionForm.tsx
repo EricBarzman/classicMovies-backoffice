@@ -1,12 +1,12 @@
 import { useRegions } from "@/firebase/movies/regionHooks";
-import { DocumentData } from "firebase/firestore";
+import { RegionSentDto } from "@/types/movies.type";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 function RegionForm({ id }: { id: null | string; }) {
 
-  const [region, setRegion] = useState<DocumentData>({
+  const [region, setRegion] = useState<RegionSentDto>({
     name: "",
   });
 
@@ -14,29 +14,33 @@ function RegionForm({ id }: { id: null | string; }) {
 
   const router = useRouter();
   const [nameError, setNameError] = useState<string | null>(null);
-  
+
   useEffect(() => {
     if (id) {
       getRegionById(id).then(data => setRegion(data))
     }
   }, [])
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: { preventDefault: () => void; }) {
     e.preventDefault();
     if (region.name.length < 1 || region.name === "") {
       setNameError("You must type a name");
       return;
     }
-    
+
     try {
       if (!id) {
-        await createRegion(region);
+        await createRegion({
+          name: region.name
+        });
         router.push("/movies/regions");
         toast.success("Region successfully created");
-        
+
       }
       else {
-        await updateRegion(id, region);
+        await updateRegion(id, {
+          name: region.name
+        });
         router.push("/movies/regions");
         toast.success("Region successfully edited");
       };

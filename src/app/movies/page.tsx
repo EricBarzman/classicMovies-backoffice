@@ -8,7 +8,7 @@ function MoviesHomePage() {
       <h2 className='text-xl font-semibold mb-12'>All movie related categories</h2>
       <div className='grid grid-cols-3 gap-30 '>
         {categoriesList.map(cat => (
-          <Link key={cat} href={`/movies/${cat}`} className='p-2 rounded-lg hover:bg-amber-500'>
+          <Link key={cat} href={`/movies/${cat}`} className='p-3 text-center rounded-lg bg-gray-200 hover:bg-amber-500'>
             {/* Affiche le nom de la catégorie */}
             {cat[0].toUpperCase() + cat.substring(1)}
           </Link>
