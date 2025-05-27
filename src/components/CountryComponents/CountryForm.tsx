@@ -1,8 +1,11 @@
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+// Firebase
 import { useCountries } from "@/firebase/movies/countryHooks";
 import { useRegions } from "@/firebase/movies/regionHooks";
 import { DocumentData } from "firebase/firestore";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+
 import toast from "react-hot-toast";
 
 function CountryForm({ id }: { id: null | string; }) {
@@ -31,21 +34,21 @@ function CountryForm({ id }: { id: null | string; }) {
     }
   }, [])
 
-  async function handleSubmit() {
-
+  async function handleSubmit(e: { preventDefault: () => void; }) {
+    e.preventDefault();
     setNameError(null);
     setRegionError(null);
 
-    if (country.name.length < 1 || country.name === '') {
-      setNameError("You must type a name");
-      return;
-    }
-    if (country.regionId === "" || !country.regionId) {
-      setRegionError("You must choose a region");
-      return;
-    }
-
     try {
+      if (country.name.length < 1 || country.name === '') {
+        setNameError("You must type a name");
+        return;
+      }
+      if (country.regionId === "" || !country.regionId) {
+        setRegionError("You must choose a region");
+        return;
+      }
+
       if (!id) {
         await createCountry(country);
         router.push("/movies/countries");
@@ -62,9 +65,6 @@ function CountryForm({ id }: { id: null | string; }) {
       toast.error("L'opération a échoué. Voir console.")
       console.error("Echec à créer/éditer: ", error);
 
-    } finally {
-      setNameError(null);
-      setRegionError(null);
     }
   }
 
@@ -85,7 +85,7 @@ function CountryForm({ id }: { id: null | string; }) {
         />
         <label className="font-semibold text-sm">Region
           {regionError &&
-            <span style={{ color: 'red' }}> {nameError}</span>}
+            <span style={{ color: 'red' }}> {regionError}</span>}
         </label>
         <select
           className="mt-4 border-1 rounded-xl p-2 w-1/2"
