@@ -1,5 +1,6 @@
 "use client";
 
+import BackButton from '@/components/MovieBackButton/BackButton';
 import { useRegions } from '@/firebase/movies/regionHooks';
 import { RegionDto } from '@/types/movies.type'
 import Link from 'next/link'
@@ -42,6 +43,8 @@ function RegionsPage() {
         <Link className='rounded-lg mt-4 px-4 py-2 bg-amber-300 hover:bg-amber-400' href="/movies/regions/add">
           + Créer une région
         </Link>
+
+        <BackButton name="" />
       </div>
     </div>
   )

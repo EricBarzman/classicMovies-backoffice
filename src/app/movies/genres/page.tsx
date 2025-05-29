@@ -1,5 +1,6 @@
 "use client";
 
+import BackButton from '@/components/MovieBackButton/BackButton';
 import { useGenres } from '@/firebase/movies/genreHooks';
 import { GenreDto } from '@/types/movies.type'
 import Link from 'next/link'
@@ -47,6 +48,8 @@ function GenresPage() {
         <Link className='rounded-lg mt-4 px-4 py-2 bg-amber-300 hover:bg-amber-400' href="/movies/genres/add">
           + Create genre
         </Link>
+
+        <BackButton name="" />
       </div>
     </div>
   )

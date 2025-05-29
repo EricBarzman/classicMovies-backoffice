@@ -12,7 +12,7 @@ export type RegionSentDto = {
 export interface CountryDto extends DocumentData {
   id: string;
   name: string;
-  region: RegionDto;
+  regionId: string;
 }
 
 export type CountrySentDto = {
@@ -33,7 +33,7 @@ export interface DirectorDto extends DocumentData {
   id: string;
   firstName: string;
   lastName: string;
-  country: CountryDto;
+  countryId: string;
 }
 
 export type DirectorSentDto = {
@@ -56,31 +56,32 @@ export type GenreSentDto = {
 export type DecadeChoiceProps =
   '1920' | '1930' | '1940' | '1950' | '1960' | '1970' | '1980' | '1990' | '2000' | '2010'
 
-export interface MoviesCompleteDto extends DocumentData {
-  id: string;
-  title: string;
-  slug: string;
-  year: number;
-  country: CountryDto;
-  genre: GenreDto;
-  director: DirectorDto;
-  shortDescription?: string;
-  decadeChoice: DecadeChoiceProps;
-  keywords: KeywordDto[];
-  get_image: string;
-}
-
-export interface MovieSingleDto extends DocumentData  {
+export type MoviesCompleteDto = {
   id: string;
   title: string;
   slug: string;
   year: number;
   countryId: string;
   genreId: string;
+  director: DirectorDto;
+  shortDescription?: string;
+  decadeChoice?: DecadeChoiceProps;
+  keywords: string[];
+  get_image: string;
+}
+
+export interface MovieDirectorInfoDto extends DocumentData  {
+  id: string;
+  title: string;
+  slug: string;
+  year: number;
+  countryId: string;
+  genreId: string;
+  director: DirectorDto;
   directorId: string;
   shortDescription?: string;
-  decadeChoice: DecadeChoiceProps;
-  keywordsId: string[];
+  decadeChoice?: DecadeChoiceProps;
+  keywords: string[];
   get_image: string;
 }
 
@@ -92,7 +93,7 @@ export type MovieSentDto = {
   genreId: string;
   directorId: string;
   shortDescription?: string;
-  decadeChoice: DecadeChoiceProps;
-  keywordsId: string[];
+  decadeChoice?: string;
+  keywords: string[];
   get_image: string;
 }
