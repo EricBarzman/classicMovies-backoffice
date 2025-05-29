@@ -28,10 +28,22 @@ function DirectorPage() {
       id: "",
       countryId: ""
     },
+    genre: {
+      id: "",
+      label: "",
+      slug: ""
+    },
+    country: {
+      name: "",
+      id: "",
+      regionId: ""
+    },
+    keywordsList: [],
     shortDescription: '',
     decadeChoice: '1920',
     keywords: [],
     get_image: '',
+    youtube_url: "",
   });
 
   useEffect(() => {

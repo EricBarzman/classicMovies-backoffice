@@ -7,8 +7,7 @@ import {
   doc,
   getDoc,
   getDocs,
-  orderBy,
-  query,
+  // orderBy,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../client";
@@ -43,8 +42,41 @@ export function useMovies() {
     const ref = doc(db, 'movies', id);
     const snap = await getDoc(ref);
 
+    // Get all external attributes --eg join--
+    const refDirector = doc(db, "directors", snap.data()!.directorId)
+    const director = await getDoc(refDirector);
+    
+    const refGenre = doc(db, "genres", snap.data()!.genreId)
+    const genre = await getDoc(refGenre);
+    
+    const refCountry = doc(db, "countries", snap.data()!.countryId)
+    const country = await getDoc(refCountry);
 
-    return { ...snap.data(), id }
+    const refKeywords = collection(db, 'keywords');
+    const snapKeywords = await getDocs(refKeywords);
+    const keywordsList = snapKeywords.docs.map(doc => Object.assign(
+      {},
+      { id: doc.id },
+      doc.data()
+    ))
+
+    return {
+      ...snap.data(),
+      id,
+      director: {
+        id: director.id,
+        ...director.data()
+      },
+      country: {
+        id: country.id,
+        ...country.data()
+      },
+      genre: {
+        id: genre.id,
+        ...genre.data()
+      },
+      keywordsList: keywordsList.filter(kword => snap.data()!.keywords.includes(kword.id))
+    }
   };
 
   const createMovie = async (data: DocumentData) => {

@@ -62,12 +62,16 @@ export type MoviesCompleteDto = {
   slug: string;
   year: number;
   countryId: string;
+  country: CountryDto;
+  genre: GenreDto;
   genreId: string;
   director: DirectorDto;
   shortDescription?: string;
   decadeChoice?: DecadeChoiceProps;
   keywords: string[];
+  keywordsList: KeywordDto[];
   get_image: string;
+  youtube_url: string;
 }
 
 export interface MovieDirectorInfoDto extends DocumentData  {
@@ -83,6 +87,7 @@ export interface MovieDirectorInfoDto extends DocumentData  {
   decadeChoice?: DecadeChoiceProps;
   keywords: string[];
   get_image: string;
+  youtube_url: string;
 }
 
 export type MovieSentDto = {
@@ -96,4 +101,5 @@ export type MovieSentDto = {
   decadeChoice?: string;
   keywords: string[];
   get_image: string;
+  youtube_url: string;
 }
