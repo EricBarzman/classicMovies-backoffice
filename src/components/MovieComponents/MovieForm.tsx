@@ -100,6 +100,7 @@ function MovieForm({ id }: { id: null | string; }) {
           keywords: movie.keywords,
           get_image: slugify(movie.title) + "." + "jpg",
           shortDescription: movie.shortDescription,
+          youtube_url: movie.youtube_url,
         });
         router.push("/movies/movies");
         toast.success("Movie successfully created");
@@ -118,6 +119,7 @@ function MovieForm({ id }: { id: null | string; }) {
           keywords: movie.keywords,
           get_image: slugify(movie.title) + "." + "jpg",
           shortDescription: movie.shortDescription,
+          youtube_url: movie.youtube_url,
         });
         router.push("/movies/movies");
         toast.success("Movie successfully edited");
@@ -156,6 +158,16 @@ function MovieForm({ id }: { id: null | string; }) {
           className="mb-4 w-1/2"
           value={movie.year}
           onChange={(e) => setMovie({ ...movie, year: Number(e.target.value) })}
+        />
+
+        <label className="font-semibold text-sm">Youtube link
+        </label>
+        <input
+          type="text"
+          placeholder="Enter url..."
+          className="mb-4"
+          value={movie.youtube_url}
+          onChange={(e) => setMovie({ ...movie, youtube_url: e.target.value })}
         />
 
         <label className="font-semibold text-sm mt-6">
