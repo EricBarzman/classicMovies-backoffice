@@ -19,6 +19,7 @@ function MovieForm({ id }: { id: null | string; }) {
     title: "",
     year: 0,
     slug: "",
+    youtube_url: '',
     countryId: "",
     genreId: "",
     directorId: "",
@@ -49,7 +50,7 @@ function MovieForm({ id }: { id: null | string; }) {
 
   useEffect(() => {
     if (id) {
-      getMovieByIdWithAllInfo(id).then(data => setMovie(data));
+      getMovieByIdWithAllInfo(id).then(data => setMovie(data)); 
     }
     getCountries().then(data => setCountries(data));
     getDirectors().then(data => setDirectors(data));
@@ -232,21 +233,23 @@ function MovieForm({ id }: { id: null | string; }) {
           ))}
         </select>
 
-        <label className="font-semibold text-sm mt-6">
+        <label className="font-semibold text-sm mt-6 mb-2">
           Keywords
         </label>
-        {keywords.map(keyword => (
-          <div key={keyword.id}>
-            <label>{keyword.label}</label>
-            <input
-              defaultChecked={movie.keywords.includes(keyword.id)}
-              type="checkbox"
-              value={keyword.id}
-              key={keyword.id}
-              onChange={handleKeywordChange}
-            />
-          </div>
-        ))}
+        <div className="grid grid-cols-3 gap-1">
+          {keywords.map(keyword => (
+            <div key={keyword.id}>
+              <label>{keyword.label}</label>
+              <input
+                defaultChecked={movie.keywords.includes(keyword.id)}
+                type="checkbox"
+                value={keyword.id}
+                key={keyword.id}
+                onChange={handleKeywordChange}
+              />
+            </div>
+          ))}
+        </div>
 
         <label className="font-semibold mt-8 text-sm">
           Short description

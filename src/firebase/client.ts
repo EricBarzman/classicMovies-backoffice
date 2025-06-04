@@ -6,7 +6,7 @@ import { getStorage } from 'firebase/storage';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCE5HlPPV4J6casNOCqz1Hv_huSk-IYLog",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: "classic-movies-eb.firebaseapp.com",
   projectId: "classic-movies-eb",
   storageBucket: "classic-movies-eb.firebasestorage.app",

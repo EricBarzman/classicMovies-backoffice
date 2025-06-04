@@ -1,8 +1,7 @@
 
 export interface AvatarDto {
-  _id : string;
-  id : number;
-  label : string;
+  id : string;
+  avatarId : number;
   get_image: string;
 }
 

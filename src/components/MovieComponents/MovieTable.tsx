@@ -14,6 +14,7 @@ function MovieTable({ id, movie }: { id : string, movie: MoviesCompleteDto }) {
           <th className='border border-gray-500 p-3'>Decade</th>
           <th className='border border-gray-500 p-3'>Genre</th>
           <th className='border border-gray-500 p-3'>Keywords</th>
+          <th className='border border-gray-500 p-3'>Youtube URL</th>
           <th className='border border-gray-500 p-3'>Short Description</th>
           <th className='border border-gray-500 p-3'>Action</th>
         </tr>
@@ -21,12 +22,13 @@ function MovieTable({ id, movie }: { id : string, movie: MoviesCompleteDto }) {
       <tbody>
         <tr>
           <td className='border border-gray-500 p-3'>{movie.title}</td>
-          <td className='border border-gray-500 p-3'>{movie.director.firstName} {movie.director.firstName}</td>
+          <td className='border border-gray-500 p-3'>{movie.director.firstName} {movie.director.lastName}</td>
           <td className='border border-gray-500 p-3'>{movie.year}</td>
           <td className='border border-gray-500 p-3'>{movie.country.name}</td>
           <td className='border border-gray-500 p-3'>{movie.decadeChoice}s</td>
           <td className='border border-gray-500 p-3'>{movie.genre.label}</td>
           <td className='border border-gray-500 p-3'>{movie.keywordsList && movie.keywordsList.map(keyword => keyword.label).join(", ")}</td>
+          <td className='border border-gray-500 p-3'>{movie.youtube_url}</td>
           <td className='border border-gray-500 p-3'>{movie.shortDescription}</td>
           <td className='border border-gray-500 p-3 hover:bg-amber-200'>
             <Link href={`/movies/movies/edit/${id}`}>Edit</Link>
