@@ -1,3 +1,4 @@
+import { Timestamp } from "firebase/firestore";
 
 export interface AvatarDto {
   id : string;
@@ -6,16 +7,22 @@ export interface AvatarDto {
 }
 
 export interface VoteDto {
-  _id: string;
+  id: string;
   comment: string;
   rating: number;
   movieId: string;
+}
 
+export interface ContactUsDto {
+  id: string;
+  email: string;
+  topic: string;
+  content: string;
+  createdAt: Timestamp;
 }
 
 export interface UserDto {
-  _id: string;
-  clerkId: string;
+  id: string;
   email: string;
   username: string;
   avatarId: number;
@@ -23,7 +30,7 @@ export interface UserDto {
 }
 
 export interface UserFavorite {
-  _id: string;
+  id: string;
   userId: string;
   movieId: string;
   createdAt: string;

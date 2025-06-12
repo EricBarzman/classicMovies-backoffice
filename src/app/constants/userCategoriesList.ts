@@ -1,6 +1,6 @@
 export const userCategories = [
   "avatars",
   "votes",
-  "comments",
+  "contact messages",
   "users",
 ];
